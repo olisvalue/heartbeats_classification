@@ -1,0 +1,597 @@
+id,caption
+b0123,No evidence of cardiac disease.
+b0137,"During examination, normal heart sounds were heard."
+b0447,Uncomplicated and typical heart sounds.
+b0321,Ordinary heartbeat and sounds noted on routine cardiac exam.
+b0335,Rhythmic lub-dub sounds detected on routine cardiac assessment.
+b0453,Normal heart rate with no additional sounds.
+b0309,Symmetrical and synchronized heartbeats.
+b0484,Rhythmic heart tones in normal pattern heard on stethoscope exam.
+b0490,Regular and uniform heartbeats.
+b0255,Standard cardiac auscultation reveals normal heartbeat rhythm.
+b0241,Heart valves functioning normally.
+b0269,Stable and balanced cardiac rhythm.
+b0296,Normal and synchronized lub-dub sounds.
+b0282,Routine auscultation finds expected lub-dub sounds without extras.
+b0057,Assessing cardiac activity finds normal heart sounds and rate.
+b0043,Normal and synchronized lub-dub sounds.
+b0094,Consistent and balanced cardiac rhythm.
+b0080,Heart sounds clear and distinct.
+b0081,Regular and steady pulsations in the heart.
+b0095,Healthy heart exhibiting a regular rhythm.
+b0042,Normal heartbeat rate detected on systematic chest auscultation.
+b0056,Heart sounds consistent with normal cardiac function.
+b0283,The heart sounds are consistent and reliable.
+b0297,Heart examination normal.
+b0268,"Heart sounds clear and regular, no abnormalities detected."
+b0240,Uniform and reliable heart sounds.
+b0254,Regular and steady pulsations in the heart.
+b0485,Undisturbed cardiac rhythm with no anomalies.
+b0308,Uncomplicated and typical heart sounds.
+b0334,Heart sounds are being evenly spaced without irregularities.
+b0452,Standard assessment detects repetitive heart sound rhythms.
+b0446,Consistent and synchronized lub-dub sounds.
+b0320,Regular cardiac cycle with no discernible abnormalities.
+b0136,Normal heart sounds without any signs of dysfunction.
+b0122,Ordinary heart sounds noted on routine auscultation positions.
+b0134,A regular cardiac cycle with no deviations.
+b0120,Rhythmic heart tones in normal pattern heard on stethoscope exam.
+b0108,Regular and rhythmic lub-dub sounds.
+b0450,Cardiac exam shows normal first and second heart sounds in expected locations.
+b0336,"Heart sounds clear and regular, no abnormalities detected."
+b0322,Physiologically normal heart rhythm.
+b0444,A regular cardiac cycle without any aberrations.
+b0478,No evidence of coronary artery disease.
+b0487,Routine auscultation finds expected lub-dub sounds without extras.
+b0242,Steady and even heart rhythm.
+b0256,Uncomplicated and typical heart sounds.
+b0281,Heart sounds clear and strong.
+b0295,Standard cardiac exam finds regular heart sound pattern.
+b0040,The patient exhibits clear and normal heart sounds.
+b0054,Normal heart sounds with no murmurs or clicks present.
+b0068,Normal heart rate and regular beat is heard on chest auscultation.
+b0083,"Heart rhythm normal, no arrhythmias."
+b0097,Standard cardiac exam finds expected regular beat without added noises.
+b0096,Heart valves functioning properly.
+b0082,Healthy heart exhibiting normal lub-dub sounds.
+b0069,Stable and balanced cardiac rhythm.
+b0055,"Good cardiac function, no murmurs or arrhythmias."
+b0041,Steady and even pulsations in the heart.
+b0294,Hearing the distinct S1 and S2 heart sounds at appropriate intervals.
+b0280,Standard cardiac exam reveals rhythmic heart tones as expected.
+b0257,Regular cardiac rhythm without any noticeable abnormalities.
+b0243,Normal heart sounds without any murmurs or clicks.
+b0486,Steady and evenly spaced heart sounds.
+b0479,The heart sounds are consistent and reliable.
+b0323,Smooth and regular heart rhythm.
+b0445,S1 and S2 sounds are clearly distinguishable at standard auscultation points.
+b0451,Regular heart tones cycle located on typical cardiac exam points.
+b0337,Harmonious lub-dub pattern indicative of a healthy heart.
+b0109,Steady and symmetrical pulsations in the heart.
+b0121,Systematic cardiac exam detects normal heart sounds without murmurs.
+b0135,No signs of heart failure or disease.
+b0119,Symmetric and synchronized lub-dub sounds.
+b0131,Normal heart sounds without any murmurs or clicks.
+b0125,Regular and uniform heartbeats.
+b0469,Symmetrical and synchronized heartbeats.
+b0333,"Heart examination normal, no abnormal sounds."
+b0455,Normal heart sounds without any signs of dysfunction.
+b0441,Clear and well-defined heart sounds.
+b0327,Normal S1 and S2 heart sounds are heard.
+b0482,Normal first and second heart sounds are noted on stethoscope exam.
+b0247,Unremarkable heart sounds suggesting normal function.
+b0253,Symmetrical and synchronized heart sounds.
+b0284,Clear and audible lub-dub sounds.
+b0290,Clear and well-defined lub-dub sounds.
+b0079,Heart sounds strong and regular.
+b0045,Systematic cardiac exam detects normal heart sounds without murmurs.
+b0051,Standard cardiac assessment detects ordinary S1 and S2 rhythms.
+b0086,Hearing the distinct S1 and S2 heart sounds at appropriate intervals.
+b0092,No cardiac irregularities detected.
+b0093,Consistent and balanced heart rhythm.
+b0087,Smooth and regular heart rhythm.
+b0050,Normal and synchronized lub-dub sounds.
+b0044,Normal and balanced heart sounds.
+b0078,"Upon listening to the heart, normal heart sounds are appreciated."
+b0291,Usual dual heart tones detected on routine chest stethoscope exam.
+b0285,Consistent and balanced cardiac rhythm.
+b0252,Normal heart sounds without any signs of dysfunction.
+b0246,Clear and well-defined lub-dub sounds.
+b0483,Stethoscope detects normal repetition of two distinct cardiac sounds.
+b0440,Regular cardiac rhythm with no detectable irregularities.
+b0326,Normalheart sounds characterized by a steady tempo.
+b0332,Normal cardiac findings detected on routine heart sound exam.
+b0454,Regular heart tones cycle located on typical cardiac exam points.
+b0468,The heart sounds are consistent and reliable.
+b0124,Standard cardiac exam finds normal heart sound dual-tone cycle.
+b0130,Clear and recognizable lub-dub sounds.
+b0118,Regular heartbeat without abnormal extra sounds on chest auscultation.
+b0126,Normal and balanced heart sounds.
+b0132,Rhythmic and predictable heart sounds.
+b0318,Regular and steady pulsations in the heart.
+b0324,Typical and unremarkable heart sounds.
+b0442,Normalheart sounds characterized by a steady tempo.
+b0456,Usual dual heart tones detected on routine chest stethoscope exam.
+b0330,Rhythmic and predictable heart sounds.
+b0481,"Heart sounds clear and regular, no abnormalities detected."
+b0278,Stable and balanced cardiac rhythm.
+b0250,Cardiac exam finds standard dual tones without extra heart murmurs.
+b0244,Normal heart sounds characterized by a steady pace.
+b0293,No signs of heart problems.
+b0287,Normal and synchronized lub-dub sounds.
+b0052,Regular and uniform heartbeats.
+b0046,Symmetrical and synchronized heartbeats.
+b0091,Standard cardiac assessment reveals ordinary heart sound cycle.
+b0085,No cardiac irregularities detected.
+b0084,"Normal heartbeat, no irregularities."
+b0090,Clear and well-defined lub-dub sounds.
+b0047,Healthy heart exhibiting a regular rhythm.
+b0053,Typical and unremarkable heart sounds.
+b0286,Conventional heart pumping pattern heard on systematic listening.
+b0292,Undisturbed cardiac rhythm with no anomalies.
+b0245,A regular cardiac rhythm without any abnormalities.
+b0251,Regular and synchronized lub-dub sounds.
+b0279,Steady and even pulsations in the heart.
+b0480,Clear and recognizable heart sounds.
+b0457,Normal heartbeat rate and rhythm is found on standard exam.
+b0331,Cardiac exam finds standard dual tones without extra heart murmurs.
+b0325,Clear and distinct lub-dub sounds.
+b0443,Regular heart pumping routine noted on typical cardiac exam.
+b0319,Standard dual heart sound pattern heard on typical cardiac check.
+b0133,Standard lub-dub heart tones in regular pacing are being auscultated.
+b0127,Normal and balanced heart sounds.
+b0140,Symmetric and synchronized lub-dub sounds.
+b0154,Undisturbed cardiac rhythm with no anomalies.
+b0168,Heart sounds regular and healthy.
+b0183,The heart sounds are consistent and reliable.
+b0197,Regular and evenly spaced beats of a normal heart.
+b0342,Symmetrical and synchronized heartbeats.
+b0424,Typical and balanced heart rhythm.
+b0430,Listening for extra sounds finds normal heart tones without murmurs.
+b0356,Expected S1 and S2 sounds heard at standard timing on exam.
+b0418,Regular and steady pulsations in the heart.
+b0381,Heart examination reveals normal heart sounds.
+b0395,Standard cardiac auscultation reveals normal heartbeat rhythm.
+b0236,Consistent and rhythmic cardiac contractions.
+b0222,Clear and recognizable lub-dub sounds.
+b0034,Stable and balanced cardiac rhythm.
+b0020,"Heart examination normal, no abnormal sounds."
+b0008,Symmetric and synchronized lub-dub sounds.
+b0009,Listening carefully detects regular heartbeat without added murmurs.
+b0021,Regular and steady pulsations in the heart.
+b0035,Consistent and synchronized lub-dub sounds.
+b0223,Normal heart sounds without any murmurs or clicks.
+b0237,Heart sounds consistent with normal cardiac function.
+b0394,A regular cardiac cycle with no deviations.
+b0380,Typical and balanced heart rhythm.
+b0419,A regular cardiac cycle without any aberrations.
+b0431,Regular and balanced cardiac contractions.
+b0357,Regular pulsations indicating a healthy cardiovascular system.
+b0343,A regular cardiac cycle without any aberrations.
+b0425,Clear and recognizable lub-dub sounds.
+b0196,Steady and even pulsations in the heart.
+b0182,Stable and balanced cardiac rhythm.
+b0169,Rhythmic lub-dub of heart sounds is noted without extra sounds in between.
+b0155,Clear and well-defined heart sounds.
+b0141,Undisturbed cardiac rhythm with no anomalies.
+b0157,Typical heart sounds of a well-functioning cardiovascular system.
+b0143,Rhythmic and predictable heart sounds.
+b0194,Normal heart sounds characterized by a steady tempo.
+b0180,S1 and S2 sounds are clearly distinguishable at standard auscultation points.
+b0355,Heart sounds healthy and regular.
+b0433,Normal heart sounds without any signs of dysfunction.
+b0427,Undisturbed cardiac rhythm with no irregularities.
+b0341,"Heart examination normal, no abnormal sounds."
+b0369,Steady and symmetrical pulsations in the heart.
+b0396,Clear and recognizable lub-dub sounds.
+b0382,Typical and symmetrical heart rhythm.
+b0221,Regular and uniform heartbeats.
+b0235,Standard cardiac assessment detects ordinary S1 and S2 rhythms.
+b0209,No cardiac irregularities detected.
+b0023,Heart sounds clear and healthy.
+b0037,Stable and balanced cardiac rhythm.
+b0036,Clear and audible heart sounds.
+b0022,The heart sounds are consistent and reliable.
+b0208,Typical and symmetrical heart rhythm.
+b0234,Normal first and second heart sounds in standard timing are auscultated.
+b0220,The cardiac examination indicates the presence of normal heart sounds.
+b0383,Standard heart tones heard on auscultation of chest positions.
+b0397,Regular and uniform heartbeats.
+b0368,"During examination, normal heart sounds were heard."
+b0426,Stethoscope detects normal repetition of two distinct cardiac sounds.
+b0340,Regular and steady pulsations in the heart.
+b0354,The heart sounds are within the normal range.
+b0432,"Regular dual-toned heartbeat is auscultated at apex, borders and valves."
+b0181,Clear and regular heart sounds.
+b0195,Harmonious lub-dub pattern characteristic of a healthy heart.
+b0142,Regular and uniform heartbeats.
+b0156,Uniform and reliable heart sounds.
+b0152,"Auscultation findings indicated the absence of any abnormal sounds, confirming normal heart sounds."
+b0146,No cardiac abnormalities heard.
+b0191,Heart valves functioning properly.
+b0185,Standard cardiac assessment reveals normal heartbeat tones and rate.
+b0378,Normal heart sounds without any murmurs or gallops.
+b0436,Regular and steady pulsations in the heart.
+b0350,"Heart rhythm normal, no arrhythmias."
+b0344,Heart examination normal.
+b0422,Steady and even pulsations in the heart.
+b0393,Steady and even pulsations in the heart.
+b0387,No signs of heart failure.
+b0218,Steady and evenly spaced heart sounds.
+b0224,The auscultatory findings indicated the presence of normal heart sounds.
+b0230,Typical heart sounds of a well-functioning cardiovascular system.
+b0026,Heart sounds clear and distinct.
+b0032,Standard cardiac exam finds expected regular beat without added noises.
+b0033,Heart examination normal.
+b0027,Common lub-dub cycle detected on standard chest auscultation.
+b0231,Normal heart rate with no audible irregularities.
+b0225,Stable and balanced cardiac rhythm.
+b0219,Unremarkable heart sounds indicating normal function.
+b0386,A regular cardiac rhythm without any abnormalities.
+b0392,Regular lub-dub sounds of a healthy heart.
+b0345,Uniform and reliable heart sounds.
+b0423,No signs of heart failure or disease.
+b0437,Consistent and balanced heart rhythm.
+b0351,Systematic auscultation reveals ordinary heart tones pattern.
+b0379,Listening clearly to the regular rhythm and tempo of the heart sounds.
+b0184,Regular and evenly spaced beats of a normal heart.
+b0190,Expected S1 and S2 sounds heard at standard timing on exam.
+b0147,Normal heart rate with no audible abnormalities.
+b0153,Typical and symmetrical heart rhythm.
+b0179,No cardiac abnormalities detected.
+b0145,Standard cardiac exam detects regular rhythmic pumping heart sounds.
+b0151,Normal and synchronized lub-dub sounds.
+b0186,Systematic auscultation reveals ordinary heart tones pattern.
+b0192,Regular cardiac rhythm without any noticeable abnormalities.
+b0409,Heart rhythm steady and normal.
+b0421,Normal and synchronized lub-dub sounds.
+b0347,No evidence of cardiac disease.
+b0353,Normal and synchronized lub-dub sounds.
+b0435,Consistent and synchronized lub-dub sounds.
+b0384,Standard cardiac auscultation detects common lub-dub heart tones.
+b0390,No murmurs or extra sounds heard.
+b0233,"Heart sounds clear, regular, and strong."
+b0227,Clear and recognizable heart sounds.
+b0019,Normal and balanced heart sounds.
+b0031,Systematic cardiac auscultation finds standard dual tones pattern.
+b0025,Normal heart sounds without any irregularities.
+b0024,Expected S1 and S2 heart sound routine is detected.
+b0030,Healthy heart exhibiting normal lub-dub sounds.
+b0018,"Heart rhythm consistent, no irregularities."
+b0226,Normal heart sounds without any irregularities.
+b0232,Standard cardiac exam detects regular heartbeat sounds as expected.
+b0391,Smooth and regular heart rhythm.
+b0385,Clear and well-defined lub-dub sounds.
+b0352,Regular heart pumping pattern detected on cardiac assessment.
+b0434,Clear and distinct S1 and S2 heart sounds.
+b0420,Clear and well-defined lub-dub sounds.
+b0346,No evidence of coronary artery disease.
+b0408,Clear and audible lub-dub sounds.
+b0193,Smooth and regular heart rhythm.
+b0187,Rhythmic lub-dub sounds detected on routine cardiac assessment.
+b0150,Uncomplicated and typical heart sounds.
+b0144,Healthy heart exhibiting a regular rhythm.
+b0178,Regular heartbeat detected on routine chest auscultation.
+b0161,Regular heart pumping pattern detected on cardiac assessment.
+b0175,Regular heart tones cycle located on typical cardiac exam points.
+b0149,Typical and balanced heart rhythm.
+b0363,Consistent and synchronized lub-dub sounds.
+b0405,The assessment of heart sounds during auscultation demonstrated a normal cardiac rhythm.
+b0411,"No extra heart sounds, murmurs or gallops detected with stethoscope."
+b0377,Regular and steady pulsations in the heart.
+b0439,Regular heart tones located on auscultation of cardiac regions.
+b0388,Systematic listening finds ordinary heartbeat sounds and pace.
+b0217,Rhythmic and predictable heart sounds.
+b0203,Listening clearly to the regular rhythm and tempo of the heart sounds.
+b0015,Regular heart tones located on auscultation of cardiac regions.
+b0001,Standard cardiac exam detects regular rhythmic pumping heart sounds.
+b0029,Clear and well-defined lub-dub sounds.
+b0028,Unremarkable heart sounds suggesting normal function.
+b0014,Normal and balanced heart sounds.
+b0202,Healthy heart exhibiting a consistent rhythm.
+b0216,Normal heart sounds with no murmurs.
+b0389,No evidence of cardiac disease.
+b0438,No extra noises detected on routine auscultation of heart.
+b0410,Normal cardiac findings detected on routine heart sound exam.
+b0376,A regular cardiac cycle without any aberrations.
+b0362,Rhythmic lub-dub heart sounds in regular pacing are being auscultated.
+b0404,Normal pulse rate and rhythm is noted on auscultation.
+b0148,Regular and uniform heartbeats.
+b0174,Steady and even pulsations in the heart.
+b0160,Expected S1 and S2 sounds heard at standard timing on exam.
+b0176,Clear and distinct S1 and S2 heart sounds.
+b0162,Typical and symmetrical heart rhythm.
+b0189,Symmetric and synchronized lub-dub sounds.
+b0374,Normal cardiac findings detected on routine heart sound exam.
+b0412,Heart examination reveals normal heart sounds.
+b0406,Uncomplicated and typical heart sounds.
+b0360,Regular intervals between S1 and S2 heart sounds.
+b0348,Consistent and synchronized lub-dub sounds.
+b0200,Cardiac exam finds standard dual tones without extra heart murmurs.
+b0214,Consistent and balanced heart rhythm.
+b0228,Typical and symmetrical heart rhythm.
+b0002,The heart sounds are steady and constant.
+b0016,Clear and recognizable heart sounds.
+b0017,Regular cardiac cycle with no discernible abnormalities.
+b0003,Standard cardiac exam reveals rhythmic heart tones as expected.
+b0229,Smooth and regular heart rhythm.
+b0215,Normal and synchronized lub-dub sounds.
+b0201,Systolic and diastolic sounds clear and distinct.
+b0349,Conventional heart tones found on routine cardiac stethoscope exam.
+b0407,Regular and steady pulsations in the heart.
+b0361,Healthy heart exhibiting normal lub-dub sounds.
+b0375,No signs of heart valve problems.
+b0413,Regular heartbeat is located on auscultation points of chest.
+b0188,Normal heart rate with no audible abnormalities.
+b0163,Normal heart rate with no extra sounds detected.
+b0177,Clear and recognizable lub-dub sounds.
+b0173,Clear and audible lub-dub sounds.
+b0167,There are no abnormal heart sounds detected; the heart sounds are normal.
+b0198,Typical lub-dub sounds detected on standard cardiac exam points.
+b0359,The patient exhibits clear and normal heart sounds.
+b0417,Usual heart tones detected on routine chest auscultation points.
+b0371,Uncomplicated and typical heart sounds.
+b0365,The stethoscope revealed normal heart sounds without any murmurs or abnormalities.
+b0403,Consistent and rhythmic cardiac contractions.
+b0239,Normal and harmonious heart sounds.
+b0205,Normal heart sounds were auscultated.
+b0211,Harmonious lub-dub pattern indicative of a healthy heart.
+b0007,Regular cardiac rhythm without any noticeable abnormalities.
+b0013,Normal heart rate with no audible abnormalities.
+b0012,Listening for extra sounds finds normal heart tones without murmurs.
+b0006,Regular lub-dub sounds of a healthy heart.
+b0210,Normal heart sounds were auscultated.
+b0204,Normal heart sounds with no discernible irregularities.
+b0238,Rhythmic and predictable heart sounds.
+b0364,Healthy heart exhibiting normal lub-dub sounds.
+b0402,Symmetrical and synchronized heart sounds.
+b0416,Smooth and regular heart rhythm.
+b0370,Consistent and synchronized lub-dub sounds.
+b0358,Listening for extra sounds finds normal heart tones without murmurs.
+b0199,Consistent and rhythmic cardiac contractions.
+b0166,Consistent and rhythmic cardiac contractions.
+b0172,Regular and synchronous lub-dub sounds.
+b0158,Symmetric and synchronized lub-dub sounds.
+b0164,Rhythmic heart tones in normal pattern heard on stethoscope exam.
+b0170,Rhythmic pumping heart sounds heard on stethoscope assessment.
+b0428,Common lub-dub cycle detected on standard chest auscultation.
+b0400,Standard cardiac exam detects regular rhythmic pumping heart sounds.
+b0366,Steady and symmetrical pulsations in the heart.
+b0372,Standard assessment detects repetitive heart sound rhythms.
+b0414,Clear and audible heart sounds.
+b0399,Regular heart tones located on auscultation of cardiac regions.
+b0212,Normal heartbeat with no extra sounds.
+b0206,Standard cardiac assessment reveals normal heartbeat tones and rate.
+b0038,Standard cardiac exam finds regular heart sound pattern.
+b0010,Normal and synchronized lub-dub sounds.
+b0004,"Regular dual-toned heartbeat is auscultated at apex, borders and valves."
+b0005,Regular heart tones are detected on chest exam at standard points.
+b0011,Steady and symmetrical pulsations in the heart.
+b0039,Smooth and regular heart rhythm.
+b0207,Stable and balanced cardiac rhythm.
+b0213,Regular intervals between S1 and S2 heart sounds.
+b0398,No signs of heart problems.
+b0373,Regular pulsations indicating a healthy cardiovascular system.
+b0415,No signs of heart problems.
+b0401,Heart sounds clear and healthy.
+b0367,No signs of heart failure or disease.
+b0429,Symmetrical and synchronized heartbeats.
+b0171,No signs of heart valve problems.
+b0165,The heart sounds are consistent and reliable.
+b0159,"Heart sounds clear and regular, no abnormalities detected."
+b0102,Typical and symmetrical heart rhythm.
+b0116,Steady and even pulsations in the heart.
+b0466,Steady and even pulsations in the heart.
+b0300,Rhythmic heart tones in normal pattern heard on stethoscope exam.
+b0314,Cardiac assessment reveals normal heart rate and rhythm patterns.
+b0472,Clear and audible lub-dub sounds.
+b0328,Chest listening finds normal first and second heart sound repetition.
+b0274,Normal and synchronized lub-dub sounds.
+b0260,Normal heart sounds without any murmurs or clicks.
+b0248,Undisturbed cardiac rhythm with no anomalies.
+b0076,Standard cardiac exam reveals rhythmic heart tones as expected.
+b0062,Typical and unremarkable heart sounds.
+b0089,Regular lub-dub sounds of a healthy heart.
+b0088,Clear and distinct S1 and S2 heart sounds.
+b0063,No evidence of heart failure or disease.
+b0077,Regular lub-dub sounds of a healthy heart.
+b0249,Expected heartbeat noted on standard auscultation of chest.
+b0261,Heart examination reveals normal sounds.
+b0275,Healthy heart exhibiting normal lub-dub sounds.
+b0329,Regular and uniform heartbeats.
+b0315,The cardiac examination indicates the presence of normal heart sounds.
+b0473,Consistent and rhythmic cardiac contractions.
+b0467,Clear and well-defined lub-dub sounds.
+b0301,Healthy heart exhibiting a regular rhythm.
+b0117,Clear and well-defined heart sounds.
+b0103,Steady and even pulsations in the heart.
+b0115,Healthy heart exhibiting a regular rhythm.
+b0101,Cardiac exam detects regular rhythmic heart sounds as expected.
+b0129,Regular and steady pulsations in the heart.
+b0471,Consistent and rhythmic cardiac contractions.
+b0317,Typical and symmetrical heart rhythm.
+b0303,Clear and audible heart sounds.
+b0465,Smooth and regular heart rhythm.
+b0459,Normal heart sounds are present.
+b0263,Normal heart sounds with no discernible irregularities.
+b0277,Consistent and rhythmic cardiac contractions.
+b0288,Listening to heart reveals expected regular rhythmic sounds pattern.
+b0061,Typical and unremarkable heart sounds.
+b0075,Clear and well-defined lub-dub sounds.
+b0049,Conventional heart pumping pattern heard on systematic listening.
+b0048,Normal heart sounds with no murmurs.
+b0074,"Heart sounds clear, regular, and strong."
+b0060,Assessing cardiac activity finds normal heart sounds and rate.
+b0289,Ordinary heart sounds detected on auscultation points of chest.
+b0276,Clear and audible heart sounds.
+b0262,Clear and well-defined heart sounds.
+b0458,Heart valves functioning normally.
+b0302,Standard cardiac exam detects regular heartbeat sounds as expected.
+b0464,Consistent and synchronized lub-dub sounds.
+b0470,Heart sounds clear and strong.
+b0316,Normal heart sounds without any signs of dysfunction.
+b0128,"Heart sounds clear, regular, and strong."
+b0100,Regular and uniform heartbeats.
+b0114,Regular cardiac rhythm without any noticeable abnormalities.
+b0138,Harmonious lub-dub pattern indicative of a healthy heart.
+b0110,Heart sounds clear and strong.
+b0104,Smooth and regular heart rhythm.
+b0448,Typical and balanced heart rhythm.
+b0312,Smooth and regular heart rhythm.
+b0474,Heart rhythm steady and normal.
+b0460,Clear and distinct S1 and S2 heart sounds.
+b0306,Clear and recognizable lub-dub sounds.
+b0266,"Upon listening to the heart, normal heart sounds are appreciated."
+b0272,Normal heart sounds without any murmurs or clicks.
+b0299,Heart sounds healthy and normal.
+b0058,Stable and balanced cardiac rhythm.
+b0064,Smooth and regular heart rhythm.
+b0070,Symmetrical and synchronized heart sounds.
+b0071,"No extra heart sounds, murmurs or gallops detected with stethoscope."
+b0065,Clear and audible lub-dub sounds.
+b0059,Consistent and rhythmic cardiac contractions.
+b0298,Regular and steady pulsations in the heart.
+b0273,Normal and synchronized lub-dub sounds.
+b0267,Listening clearly to the regular rhythm and tempo of the heart sounds.
+b0461,Steady and evenly spaced heart sounds.
+b0307,Healthy heart exhibiting a consistent rhythm.
+b0313,Normal S1 and S2 heart sounds were appreciated during auscultation.
+b0475,No evidence of cardiac disease.
+b0449,No signs of heart problems.
+b0105,Regular and uniform heartbeats.
+b0111,Regular pulsations indicating a healthy cardiovascular system.
+b0139,Regular and steady pulsations in the heart.
+b0107,Normal and balanced heart sounds.
+b0113,Standard cardiac exam reveals rhythmic heart tones as expected.
+b0339,"Heart examination normal, no abnormal sounds."
+b0305,Regular and steady pulsations in the heart.
+b0463,Consistent and synchronized lub-dub sounds.
+b0477,Normal heartbeat rate detected on systematic chest auscultation.
+b0311,Harmonious lub-dub pattern characteristic of a healthy heart.
+b0488,The heart sounds are steady and constant.
+b0259,Regular cardiac rhythm without any noticeable abnormalities.
+b0271,Rhythmic and predictable heart sounds.
+b0265,Clear and well-defined heart sounds.
+b0073,Heart rhythm steady and normal.
+b0067,Normal heartbeat rate and regular rhythmic pumping is detected.
+b0098,Normal heart sounds characterized by a steady pace.
+b0099,The cardiac examination indicates the presence of normal heart sounds.
+b0066,Typical heart sounds representing a well-functioning cardiovascular system.
+b0072,Clear and audible lub-dub sounds.
+b0264,Systematic chest listening finds standard heart sound repetitions.
+b0270,Clear and recognizable lub-dub sounds.
+b0258,Heart sounds consistent with normal cardiac function.
+b0489,Typical and balanced heart rhythm.
+b0476,Normal and synchronized lub-dub sounds.
+b0310,Systematic cardiac exam detects normal heart sounds without murmurs.
+b0304,Cardiac exam shows normal first and second heart sounds in expected locations.
+b0462,A regular cardiac cycle with no deviations.
+b0338,Clear and well-defined lub-dub sounds.
+b0112,Clear and well-defined heart sounds.
+b0106,Typical and symmetrical heart rhythm.
+e01947,Typical and symmetrical heart rhythm.
+e00481,No signs of heart failure.
+e01953,Normal heartbeat with no extra sounds.
+e00495,Expected heart sound rhythms found on usual cardiac check points.
+e01006,Rhythmic and predictable heart sounds.
+e00318,Rhythmic lub-dub of heart sounds is noted without extra sounds in between.
+e01760,Steady and even heart rhythm.
+e01774,Clear and audible lub-dub sounds.
+e01012,Standard cardiac exam reveals rhythmic heart tones as expected.
+e00324,Standard exam detects normal heart rate and pumping rhythms.
+e01984,Normal heart rate with no audible irregularities.
+e00442,Regular and steady pulsations in the heart.
+e01990,Normal heart rate with no additional sounds.
+e00456,Common lub-dub cycle detected on standard chest auscultation.
+e01748,Normal and harmonious heart sounds.
+e00330,Typical heart sounds representing a well-functioning cardiovascular system.
+e00867,Typical and balanced heart rhythm.
+e00873,Steady and symmetrical pulsations in the heart.
+e00683,No signs of heart problems.
+e02094,Listening carefully detects regular heartbeat without added murmurs.
+e02080,Ordinary heart sounds detected on auscultation points of chest.
+e00697,Cardiac assessment reveals normal heart rate and rhythm patterns.
+e01589,Standard cardiac exam reveals rhythmic heart tones as expected.
+e01562,Steady and even pulsations in the heart.
+e01204,S1 and S2 sounds are clearly distinguishable at standard auscultation points.
+e01210,Regular and evenly spaced beats of a normal heart.
+e01576,No cardiac irregularities detected.
+e00668,The stethoscope revealed normal heart sounds without any murmurs or abnormalities.
+e02057,Rhythmic lub-dub of heart sounds is noted without extra sounds in between.
+e00898,Regular and rhythmic heartbeat is detected on chest listening.
+e00640,No evidence of coronary artery disease.
+e00126,Typical heart sounds representing a well-functioning cardiovascular system.
+e01238,Normal heartbeat rate and rhythm is found on standard exam.
+e00132,Healthy heart exhibiting a consistent rhythm.
+e00654,Regular lub-dub sounds of a healthy heart.
+e02043,Symmetric and synchronized lub-dub sounds.
+e00913,Heart valves functioning normally.
+e00907,Routine cardiac exam notes normal S1 and S2 heart sound timing.
+e00091,Healthy heart exhibiting a consistent rhythm.
+e00085,Healthy heart exhibiting normal lub-dub sounds.
+e00708,Consistent and rhythmic cardiac contractions.
+e01416,"Heart rhythm consistent, no irregularities."
+e01370,Normal cardiac findings detected on routine heart sound exam.
+e01364,Undisturbed cardiac rhythm with no anomalies.
+e01402,No extra noises detected on routine auscultation of heart.
+e02123,"Normal heartbeat, no irregularities."
+e00734,Regular and steady pulsations in the heart.
+e00052,Symmetric and synchronized lub-dub sounds.
+e01358,Normal heart sounds are present.
+e00046,No cardiac irregularities heard.
+e00720,Consistent and synchronized lub-dub sounds.
+e02137,"Heart sounds clear, regular, and strong."
+e00293,No signs of heart problems.
+e01833,Normal pulse and rhythmic heart sounds noted on exam of chest.
+e01827,Steady and symmetrical pulsations in the heart.
+e01199,Undisturbed cardiac rhythm with no irregularities.
+e00287,Regular intervals between S1 and S2 heart sounds.
+e01172,Steady and evenly spaced heart sounds.
+e01614,Consistent and synchronized lub-dub sounds.
+e01600,Normal heartbeat rate and regular rhythmic pumping is detected.
+e00278,Assessing heart sounds locates normal tones at standard auscultation areas.
+e01166,Regular and steady pulsations in the heart.
+e00250,Symmetrical and synchronized heart sounds.
+e01628,Normal heart sounds with no discernible variations.
+e00536,Expected first and second heart sounds are heard on exam.
+e00522,Rhythmic and predictable heart sounds.
+e00244,Systematic chest listening finds standard heart sound repetitions.
+e00523,No evidence of coronary artery disease.
+e00245,Normal and symmetrical pulsations in the heart.
+e00251,"Heart rhythm normal, no arrhythmias."
+e00537,Regular and uniform heartbeats.
+e01629,No cardiac abnormalities heard.
+e01601,Healthy heart exhibiting typical S1 and S2 sounds.
+e01167,Regular and uniform heartbeats.
+e00279,Cardiac assessment reveals normal heart rate and rhythm patterns.
+e01173,"During examination, normal heart sounds were heard."
+e01615,Standard cardiac exam reveals rhythmic heart tones as expected.
+e01826,Typical lub-dub sounds detected on standard cardiac exam points.
+e00286,Clear and crisp heart sounds.
+e01198,Rhythmic lub-dub sounds detected on routine cardiac assessment.
+e00292,Harmonious lub-dub pattern of a healthy heart.
+e01832,Clear and well-defined lub-dub sounds.
+e00047,Consistent and balanced cardiac rhythm.
+e01359,Normal cardiac findings detected on routine heart sound exam.
+e02136,Consistent and rhythmic cardiac contractions.
+e00721,Rhythmic heart tones in normal pattern heard on stethoscope exam.
+e00735,Normal and synchronized lub-dub sounds.
+e02122,Normal heart sounds with no discernible variations.
+e00053,Rhythmic and predictable heart sounds.
+e01365,Expected heart sound rhythms found on usual cardiac check points.
+e01403,Routine cardiac exam notes normal S1 and S2 heart sound timing.
+e01417,Normal heart rate with no additional sounds.
+e00709,Regular and uniform heartbeats.
+e01371,No signs of heart problems.
+e00084,Normal heart sounds without any irregularities.
+e00090,The heart sounds are within the expected range.
+e00906,Normal heartbeat rate detected on systematic chest auscultation.
+e00912,Standard lub-dub heart tones cycle is heard on chest listening.
+e00133,Standard exam detects normal heart rate and pumping rhythms.
+e02042,Regular and steady pulsations in the heart.
+e00655,Ordinary heart sounds detected on auscultation points of chest.
+e00641,Heart examination reveals normal heart sounds.
+e00899,Healthy heart exhibiting a regular rhythm.
+e02056,Heart sounds clear and distinct.
+e01239,Normal and synchronized lub-dub sounds.
+e00127,Regular cardiac cycle with no discernible abnormalitie
