@@ -6,15 +6,13 @@ class AutoLinear(nn.Module):
         super(AutoLinear, self).__init__()
         self.device = device
         self.out_features = out_features
-        # self.linear = None
+        self.linear = None
         if in_features != 0:
             self.linear = nn.Linear(in_features, self.out_features).to(self.device)
 
     def forward(self, x):
-        if self.linear is None:
-            # Calculate the input size based on the input tensor
+        if self.linear == None:
             in_features = x.size(1)
-            # Create the linear layer
             self.linear = nn.Linear(in_features, self.out_features).to(self.device)
         return self.linear(x)
 
@@ -33,9 +31,9 @@ class ConvBlock(nn.Module):
     def forward(self, x):
         return self.block(x)
 
-class CNNClassifier(nn.Module):
+class Model(nn.Module):
     def __init__(self, num_classes, device):
-        super(CNNClassifier, self).__init__()
+        super(Model, self).__init__()
         #CNN (N, C, H, W)
 
         self.conv_blocks = nn.ModuleList()
@@ -48,8 +46,7 @@ class CNNClassifier(nn.Module):
             self.conv_blocks.append(conv_block)
 
         hidden_features = 1024
-        self.fc1 = AutoLinear(hidden_features, device =0, in_features=22784)
-        # self.fc1 = AutoLinear(hidden_features, device)
+        self.fc1 = AutoLinear(hidden_features, in_features=86016, device=0)
         self.relu = nn.ReLU()
         self.fc2 = nn.Linear(hidden_features, num_classes)
         self.softmax = nn.Softmax(dim=1)
@@ -58,7 +55,7 @@ class CNNClassifier(nn.Module):
         for conv_block in self.conv_blocks:
             x = conv_block(x)
         x = x.view(x.size(0), -1)  # Flatten the feature maps
-        x = self.relu(self.fc1.linear(x))
+        x = self.relu(self.fc1(x))
         x = self.softmax(self.fc2(x))
 
         if self.training:

@@ -17,8 +17,8 @@ class StatisticsMaker:
         self.csv_path = self.base_dir + "eval_scores.csv"
         self.best_model_path = self.base_dir + "best_model"
         self.epochs = []
-        self.metrics_list = ["accuracy"]
-        self.main_metric = "accuracy"
+        self.metrics_list = ["f1", "accuracy", "precision", "recall"]
+        self.main_metric = "f1"
         self.scores_dict = defaultdict(dict)
         self.create_directory()
         self.epoch = -1
@@ -119,11 +119,12 @@ class StatisticsMaker:
         torch.save(model.state_dict(), param_file)
     
     @_active_method
-    def process_metrics(self, model, score):
+    def process_metrics(self, model, scores):
         if len(self.scores_dict) == 0 and self.epoch != 0:
             df = pd.read_csv(self.csv_path)
             self.scores_dict = df.to_dict(orient='dict')
         for metric in self.metrics_list:
+            score = scores[metric]
             self.scores_dict[metric][self.epoch] = score
         #save scores to csv file
         df = pd.DataFrame.from_dict(self.scores_dict, orient='index').T

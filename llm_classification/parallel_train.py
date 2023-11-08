@@ -9,7 +9,7 @@ from torch.distributed import init_process_group, destroy_process_group
 
 # custom
 from datahandlers.MyDataloader import *
-from models.Semantic import * # network
+from models.PrefixLLM import * # network
 from Trainer import *
 
 def ddp_setup(rank, world_size):

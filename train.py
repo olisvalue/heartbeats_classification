@@ -8,9 +8,11 @@ import os, random, argparse
 
 # custom
 from models.CNNClassifier import Model
+from models.PANClassifier import PANClassifier
 from Trainer import Trainer
 from MakeDataset import MakeDataset
 from Evaluater import Evaluater
+from CNNDataLoader import CNNDataLoader
 
 # reproducibility
 def initialization(seed = 0):   
@@ -48,22 +50,12 @@ print("random_seed :", random_seed)
 total_epochs = 55
 LR = 7e-5
 
+TEST_BATCH_SIZE = 30
+TRAIN_BATCH_SIZE = 30
 
-TEST_BATCH_SIZE = 60
-TRAIN_BATCH_SIZE = 60
-
-
-
-base_dir = '/home/stud_valery/simple_audio_classification/data'
-train_dataset = MakeDataset(base_dir, 'train')
-test_dataset = MakeDataset(base_dir, 'test', unlabeled_mode=True)
-
-
-
-train_dataloader = DataLoader(dataset=train_dataset, batch_size=TRAIN_BATCH_SIZE,
-                              shuffle=True, num_workers=8, drop_last=True)
-test_dataloader = DataLoader(dataset=test_dataset, batch_size=TEST_BATCH_SIZE,
-                              shuffle=False, num_workers=8, drop_last=False)
+base_dir = '/home/stud_valery/heartbeats_classification/data/physionet'
+train_dataloader = CNNDataLoader('train', TRAIN_BATCH_SIZE, base_dir)
+test_dataloader = CNNDataLoader('test', TEST_BATCH_SIZE, base_dir)
 
 #============Experiment================
 torch.cuda.empty_cache()
@@ -74,7 +66,7 @@ USE_CUDA = torch.cuda.is_available()
 device = torch.device('cuda:'+ str(args.device) if USE_CUDA else 'cpu')
 print("Using device: ", device)
 
-model = Model(num_classes=2, device=args.device)
+model = PANClassifier(num_classes=2, device=args.device)
 
 # params = torch.load('',\
 #                      map_location='cuda:'+str(args.device))
@@ -83,7 +75,7 @@ model = Model(num_classes=2, device=args.device)
 # print(args.device, type(args.device))
 optimizer = AdamW(model.parameters(), lr=LR, weight_decay = 0.01)
 
-trainer = Trainer(model, MODEL_NAME, train_dataloader, test_dataloader, optimizer, args.device, is_distributed=False, without_eval=True)
+trainer = Trainer(model, MODEL_NAME, train_dataloader, test_dataloader, optimizer, args.device, is_distributed=False)
 trainer.train(total_epochs)
 
 

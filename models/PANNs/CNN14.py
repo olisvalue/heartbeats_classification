@@ -119,7 +119,6 @@ class Cnn14(nn.Module):
         
         self.init_weight()
         
-        self.maxpool_forclothoaudio = nn.MaxPool2d((3, 1), stride=(3, 1))
 
     def init_weight(self):
         init_bn(self.bn0)
@@ -158,10 +157,6 @@ class Cnn14(nn.Module):
         x = F.dropout(x, p=0.2, training=self.training)
         
         audio_feature = x
-        
-        # if audio's length is 30s
-        if audio_feature.size()[2] == 46 :
-            x = self.maxpool_forclothoaudio(x)
             
         
         x = torch.mean(x, dim=3)
@@ -173,6 +168,6 @@ class Cnn14(nn.Module):
        
         x = F.relu_(self.fc1(x))
         embedding = F.dropout(x, p=0.5, training=self.training)
-        semantic_feature = torch.sigmoid(self.fc_audioset(x))
+        semantic_feature = self.fc_audioset(x)
         
         return audio_feature, semantic_feature

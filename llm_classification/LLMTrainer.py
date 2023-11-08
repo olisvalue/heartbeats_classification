@@ -282,16 +282,7 @@ class Trainer:
 
     def evaluate(self):
         self.evaluater.eval()
-    
-    # def evaluate(self, nb_references = 5):
-    #     self.model.eval()
-    #     if self.is_distributed:
-    #         metrics, _, _ = eval_model_parallel(self.model, self.test_dataloader, \
-    #                                     True, self.gpu_id, test_captions=nb_references)
-    #     # else:
-    #     #     metrics, _, _ = eval_model(self.model, self.test_dataloader, \
-    #     #                                 True, self.gpu_id, test_captions=nb_references)
-               
+
 
     
 
@@ -366,27 +357,6 @@ class Evaluater:
         for audio, captions, filenames in tqdm(self.dataloader, desc="Eval using dataset..."):
             self._eval_pack(audio, captions, filenames)
         return self._get_metrics()    
-    
-# def _run_eval(self, epoch):
-#         self.model.eval()
-#         if self.is_distributed:
-#             self.test_dataloader.sampler.set_epoch(epoch)
-#             metrics, _, _ = eval_model_parallel(self.model, self.test_dataloader, \
-#                                         True, self.gpu_id, test_captions=self.test_dataloader.test_captions)
-#         else:
-#             metrics, _, _ = eval_model(self.model, self.test_dataloader, \
-#                                         True, self.gpu_id, test_captions=self.test_dataloader.test_captions)
-            
-#         self.stats.process_metrics(self.module, metrics)    
-
-# def evaluate(self, nb_references = 1):
-#         self.model.eval()
-#         if self.is_distributed:
-#             metrics, _, _ = eval_model_parallel(self.model, self.test_dataloader, \
-#                                         True, self.gpu_id, test_captions=nb_references)
-#         else:
-#             metrics, _, _ = eval_model(self.model, self.test_dataloader, \
-#                                         True, self.gpu_id, test_captions=nb_references)
             
 
 def eval_model_parallel(model, test_dataloader, beam_search, device, test_captions = 5) :
