@@ -53,9 +53,10 @@ LR = 7e-5
 TEST_BATCH_SIZE = 30
 TRAIN_BATCH_SIZE = 30
 
-base_dir = '/home/stud_valery/heartbeats_classification/data/physionet'
-train_dataloader = CNNDataLoader('train', TRAIN_BATCH_SIZE, base_dir)
-test_dataloader = CNNDataLoader('test', TEST_BATCH_SIZE, base_dir)
+base_dir = '/data/valerii/heartbeats_classification/data/physionet'
+train_dataloader = CNNDataLoader('train', TRAIN_BATCH_SIZE, base_dir, raw_audio=True)
+test_dataloader = CNNDataLoader('test', TEST_BATCH_SIZE, base_dir, raw_audio=True,
+                                weighted_sampler=False)
 
 #============Experiment================
 torch.cuda.empty_cache()

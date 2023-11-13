@@ -1,1 +1,1 @@
-Best model achieved on epoch 52, with f1 score = 0.6435390710830688
+Best model achieved on epoch 259, with f1 score = 0.9174745082855225

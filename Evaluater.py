@@ -4,8 +4,13 @@ import pandas as pd
 from torchmetrics import F1Score, Accuracy, Precision, Recall
 import torch.distributed as dist
 
+from data.adjectives import *
+import string
+
 class Evaluater:
-    def __init__(self, model, dataloader, device, main_device=0, is_distributed=False):
+    def __init__(self, model, dataloader, device, main_device=0, is_distributed=False, llm_mode=False):
+        self.llm_mode=llm_mode
+
         self.model = model
         self.dataloader = dataloader
         self.device = device
@@ -21,6 +26,9 @@ class Evaluater:
         self.pr = Precision(task="multiclass", num_classes=2, average="macro")
         self.rc = Recall(task="multiclass", num_classes=2, average="macro")
 
+
+        self.normal_words = NORMAL_ADJ
+        self.abnormal_words = ABNORMAL_ADJ
 
     def _collect_distributed(self):
         world_size = dist.get_world_size()
@@ -51,10 +59,34 @@ class Evaluater:
                 "accuracy": self.acc(predicts, ground_truth).item(),
                 "precision": self.pr(predicts, ground_truth).item(),
                 "recall": self.rc(predicts, ground_truth).item()}
-            
+
+    def clear_caption(self, caption):
+        translator = str.maketrans("", "", string.punctuation)
+        clean_text = caption.translate(translator)
+        return clean_text.lower().split()
+    
+    def check_words_in_text(self, text: list[str], word_set: list[str]):
+        for word in word_set:
+            if word.lower() in text:
+                return True
+        return False
+
+    def captions_to_labels(self, captions):
+        pred = torch.ones(len(captions)) * 2 
+        for i,caption in enumerate(captions):
+            caption = self.clear_caption(caption)
+            if self.check_words_in_text(caption, self.normal_words):
+                pred[i] = 0
+            if self.check_words_in_text(caption, self.abnormal_words):
+                pred[i] = 1
+        return pred       
     def _eval_pack(self, audio, targets):
         with torch.no_grad():
             pred = self.model(audio)
+        
+        if self.llm_mode==True:
+            pred = self.captions_to_labels(pred)
+
         self.predicts.append(pred.detach().cpu())
         self.ground_truth.append(targets)
     

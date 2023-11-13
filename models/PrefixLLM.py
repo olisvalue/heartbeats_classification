@@ -8,18 +8,18 @@ import math
 
 from torch.nn import functional as nnf
 
-from models.PANNs.CNN14 import Cnn14 # audio encoder : PANNs
+from models.PANClassifier import PANClassifier
 from .Transformer import * # transformer
 
 num_head = 8
 
-class SemanticPrefix(nn.Module):
+class PrefixLLM(nn.Module):
      
     def __init__(self, prefix_size_dict, encoder_freeze = True,
                  decoder_freeze = True, header_freeze = False,
                  map_networks_freeze = False, temporal_num_layers = 4,
                  global_num_layers = 4, device = 0):
-        super(SemanticPrefix, self).__init__()
+        super(PrefixLLM, self).__init__()
 
         # self.beam_search = beam_search
         self.device = device
@@ -33,7 +33,11 @@ class SemanticPrefix(nn.Module):
         temporal_clip_length = prefix_size_dict["temporal_prefix_size"]
         global_clip_length = prefix_size_dict["global_prefix_size"]
         
-        self.audio_encoder = get_PANNs_enc(device)
+        self.audio_encoder = PANClassifier(num_classes=2, device=device)
+        weights_path = '/data/valerii/heartbeats_classification/data/train_record/pann_balanced2/best_model'
+        params = torch.load(weights_path, map_location='cuda:' + str(device))
+        self.audio_encoder.load_state_dict(params)
+
         self.gpt = GPT2Model.from_pretrained("gpt2")
 
         self.gpt_embedding_size = self.gpt.wte.weight.shape[1] # 768
@@ -47,12 +51,9 @@ class SemanticPrefix(nn.Module):
                                         num_layers = global_num_layers, device = device)
         
         self.language_header = nn.Linear(768, 50257, bias=False) # 50257 : original vocabulary size of GPT2
-        header_gpt2_header_params = './models/PreTrained_GPT2Header.pt'
+        header_gpt2_header_params = '/data/valerii/heartbeats_classification/models/weights/PreTrained_GPT2Header.pt'
         self.language_header.load_state_dict(torch.load(header_gpt2_header_params)) # use pre-trained header
         # nn.init.kaiming_uniform_(self.language_header.weight)
-
-        self.prefix_projection = nn.Linear(768, 50257, bias=False)  
-        nn.init.kaiming_uniform_(self.prefix_projection.weight)      
 
         if encoder_freeze == True :
             for param in self.audio_encoder.parameters():
@@ -87,11 +88,10 @@ class SemanticPrefix(nn.Module):
         global_prefix_vector = self.global_mappingnetwork(global_feature).view(-1, self.global_prefix_length, self.gpt_embedding_size)
 
         prefix_vectors = torch.cat((temporal_prefix_vector, global_prefix_vector), dim=1) 
-        semantic_vectors = self.get_semantic_vectors(prefix_vectors)
 
         if self.training :
             embedding_text = self.gpt.wte(tokens.to(self.device))
-            embedding_cat = torch.cat((semantic_vectors, embedding_text), dim=1)
+            embedding_cat = torch.cat((prefix_vectors, embedding_text), dim=1)
     
             out = self.gpt(inputs_embeds=embedding_cat.to(self.device), attention_mask=mask.to(self.device))
             out_hidden_states = out[0]
@@ -101,13 +101,13 @@ class SemanticPrefix(nn.Module):
             return logits
         else :
             if beam_search == True and check_prefix == True :
-                return self.generate_beam(semantic_vectors, with_softmax = with_softmax), prefix_vectors  
+                return self.generate_beam(prefix_vectors, with_softmax = with_softmax), prefix_vectors  
             elif  beam_search == True and check_prefix == False :
-                return self.generate_beam(semantic_vectors, with_softmax = with_softmax)
+                return self.generate_beam(prefix_vectors, with_softmax = with_softmax)
             elif  beam_search == False and check_prefix == True:   
-                return self.generate(semantic_vectors, with_softmax = with_softmax), prefix_vectors
+                return self.generate(prefix_vectors, with_softmax = with_softmax), prefix_vectors
             elif  beam_search == False and check_prefix == False:   
-                return self.generate(semantic_vectors, with_softmax = with_softmax)
+                return self.generate(prefix_vectors, with_softmax = with_softmax)
 
 
     #not differentiable!!!!      
@@ -123,7 +123,7 @@ class SemanticPrefix(nn.Module):
 
         # print('after softmax: ', semantic_logits.shape)
         semantic_vectors = self.gpt.wte(semantic_logits)
-        # print('after gpt wte: ', semantic_vectors)
+        # print('after gpt wte: ', prefix_vectors)
         return semantic_vectors
 
 
@@ -261,9 +261,10 @@ class SemanticPrefix(nn.Module):
 
                 # print("logits right before next token: ", logits.shape,logits)
                 next_token = torch.argmax(logits, -1).unsqueeze(0)
-                probs = torch.softmax(logits, -1)
-                max_proba = torch.max(probs, -1)
-                max_proba_pos = torch.argmax(probs, -1)
+                
+                # probs = torch.softmax(logits, -1)
+                # max_proba = torch.max(probs, -1)
+                # max_proba_pos = torch.argmax(probs, -1)
                 # print("probs:", probs)
                 # print("next token (argmax):", next_token)
                 # print("max probability ", max_proba, "and its position: ", max_proba_pos)

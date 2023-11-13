@@ -19,6 +19,8 @@ class StatisticsMaker:
         self.epochs = []
         self.metrics_list = ["f1", "accuracy", "precision", "recall"]
         self.main_metric = "f1"
+        # self.metrics_list = ["bleu_1", "bleu_2", "bleu_3", "bleu_4", "meteor","rouge_l", "spice", "cider", "spider"]
+        # self.main_metric = "spider"
         self.scores_dict = defaultdict(dict)
         self.create_directory()
         self.epoch = -1
@@ -124,7 +126,10 @@ class StatisticsMaker:
             df = pd.read_csv(self.csv_path)
             self.scores_dict = df.to_dict(orient='dict')
         for metric in self.metrics_list:
-            score = scores[metric]
+            if self.LLM_mode==True:
+                score = scores[metric]["score"]
+            else:
+                score = scores[metric]
             self.scores_dict[metric][self.epoch] = score
         #save scores to csv file
         df = pd.DataFrame.from_dict(self.scores_dict, orient='index').T

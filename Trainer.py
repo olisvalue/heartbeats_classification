@@ -51,16 +51,12 @@ class Trainer:
 
         self.model = model.to(gpu_id)
         if self.is_distributed:
-            print('before DDP init')
             self.model = DDP(self.model, device_ids=[gpu_id])#,static_graph=True)
-            print('after DDP init')
             self.module = self.model.module
         else:
             self.module = self.model
         
-        print('before ev')
         self.evaluater = Evaluater(self.model, self.test_dataloader, self.gpu_id, is_distributed=self.is_distributed)
-        print('after ev')
 
     def _run_batch(self, audio, targets):
         logits = self.model(audio)

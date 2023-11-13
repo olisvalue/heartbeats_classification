@@ -9,11 +9,12 @@ import numpy as np
 import torch
 
 
-from DistributedWeightedSampler import DistributedWeightedSampler
+from DistributedWeightedSampler import DistributedProxySampler
 from DistributedEvalSampler import DistributedEvalSampler
 
 class CNNDataLoader(DataLoader):
-    def __init__(self, mode, batch_size, base_dir, weighted_sampler=True, raw_audio=False, is_distributed=False, SR=16000):
+    def __init__(self, mode, batch_size, base_dir, weighted_sampler=True, raw_audio=False,
+                 is_distributed=False, SR=16000, llm_mode=False, prefix_length=-1):
 
         self.raw_audio = raw_audio
         self.base_dir = base_dir
@@ -22,32 +23,36 @@ class CNNDataLoader(DataLoader):
         self.len_train = 160000 #SR * 31.25
         self.len_test = 160000
 
-        dataset = MakeDataset(self.base_dir, mode, raw_audio=self.raw_audio)
-        sampler = None
+        dataset = MakeDataset(self.base_dir, mode, raw_audio=self.raw_audio, 
+                              llm_mode=llm_mode,prefix_length=prefix_length)
 
         if self.train:
             is_drop_last = True
             is_shuffle = True
-            if weighted_sampler:
-                samples_weight = self.get_samples_weight(dataset)
-                if is_distributed:
-                    sampler = DistributedWeightedSampler(samples_weight, len(dataset),
-                                                         is_shuffle=is_shuffle, replacement=True)
-                else:
-                    sampler = WeightedRandomSampler(samples_weight, len(dataset), replacement=True)
-                is_shuffle=False
         else :
             is_shuffle = False
             is_drop_last = False
         
         cpu_core_num = 8
-        if sampler is None:
-            if is_distributed:
-                cpu_core_num = 0
+        if is_distributed:
+            cpu_core_num = 0
+            if weighted_sampler:
+                print("distributed weighted sampler")
+                samples_weight = self.get_samples_weight(dataset)
+                sampler = WeightedRandomSampler(samples_weight, len(dataset), replacement=True)
+                sampler = DistributedProxySampler(sampler)
+            else:
+                print("distributed non-weighted sampler")
                 sampler = DistributedSampler(dataset, shuffle = is_shuffle) if self.train else DistributedEvalSampler(dataset)
+            is_shuffle = False
+        else:
+            if weighted_sampler:
+                samples_weight = self.get_samples_weight(dataset)
+                sampler = WeightedRandomSampler(samples_weight, len(dataset), replacement=True)
                 is_shuffle = False
             else:
-                sampler = None  
+                sampler = None
+
 
         super(CNNDataLoader, self).__init__(dataset=dataset,
                       batch_size=batch_size,
