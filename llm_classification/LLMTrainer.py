@@ -112,8 +112,8 @@ class LLMTrainer:
             self.stats.epoch_time_measure()
             print("trying to run train epoch")
             self._run_train_epoch(epoch)
-            # if epoch % self.save_every == 0:
-            #     self.stats.save_epoch_params(self.module)
+            if epoch % self.save_every == 0:
+                self.stats.save_last_params(self.module)
             if epoch % self.eval_every == 0:
                 self._run_eval(epoch)
             # if epoch == self.epoch_freeze_encoder:

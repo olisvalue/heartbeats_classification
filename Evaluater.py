@@ -21,12 +21,13 @@ class Evaluater:
         self.main_device = main_device
         self.is_distributed=is_distributed
 
-        self.f1 = F1Score(task="multiclass", num_classes=2, average="macro")
-        self.acc = Accuracy(task="multiclass", num_classes=3)
-        self.pr = Precision(task="multiclass", num_classes=2, average="macro")
-        self.rc = Recall(task="multiclass", num_classes=2, average="macro")
+        self.f1 = F1Score(task="multiclass", num_classes=3, average="macro")
+        self.acc = Accuracy(task="multiclass", num_classes=2)
+        self.pr = Precision(task="multiclass", num_classes=3, average="macro")
+        self.rc = Recall(task="multiclass", num_classes=3, average="macro")
 
 
+        self.translator = str.maketrans("", "", string.punctuation)
         self.normal_words = NORMAL_ADJ
         self.abnormal_words = ABNORMAL_ADJ
 
@@ -54,15 +55,14 @@ class Evaluater:
             self._collect_distributed()
             if self.device != self.main_device:
                 return [None, None, None]
-    
+
         return {"f1": self.f1(predicts, ground_truth).item(),
                 "accuracy": self.acc(predicts, ground_truth).item(),
                 "precision": self.pr(predicts, ground_truth).item(),
                 "recall": self.rc(predicts, ground_truth).item()}
 
     def clear_caption(self, caption):
-        translator = str.maketrans("", "", string.punctuation)
-        clean_text = caption.translate(translator)
+        clean_text = caption.translate(self.translator)
         return clean_text.lower().split()
     
     def check_words_in_text(self, text: list[str], word_set: list[str]):
@@ -70,16 +70,24 @@ class Evaluater:
             if word.lower() in text:
                 return True
         return False
+    
+    def caption_to_pred(self, caption):
+        pred = 2
+        if type(caption) == list:
+            caption = caption[0]
+        clear_caption = self.clear_caption(caption)
+        if self.check_words_in_text(clear_caption, self.normal_words):
+            pred = 0
+        if self.check_words_in_text(clear_caption, self.abnormal_words):
+            pred = 1
+        return pred
 
     def captions_to_labels(self, captions):
         pred = torch.ones(len(captions)) * 2 
         for i,caption in enumerate(captions):
-            caption = self.clear_caption(caption)
-            if self.check_words_in_text(caption, self.normal_words):
-                pred[i] = 0
-            if self.check_words_in_text(caption, self.abnormal_words):
-                pred[i] = 1
-        return pred       
+            pred[i] = self.caption_to_pred(caption)
+        return pred
+           
     def _eval_pack(self, audio, targets):
         with torch.no_grad():
             pred = self.model(audio)

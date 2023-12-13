@@ -8,6 +8,7 @@ import math
 
 from torch.nn import functional as nnf
 
+from models.PANNs.CNN14 import Cnn14
 from models.PANClassifier import PANClassifier
 from .Transformer import * # transformer
 
@@ -18,7 +19,8 @@ class PrefixLLM(nn.Module):
     def __init__(self, prefix_size_dict, encoder_freeze = True,
                  decoder_freeze = True, header_freeze = False,
                  map_networks_freeze = False, temporal_num_layers = 4,
-                 global_num_layers = 4, device = 0):
+                 global_num_layers = 4, device = 0,
+                 llm_mode=False):
         super(PrefixLLM, self).__init__()
 
         # self.beam_search = beam_search
@@ -33,10 +35,8 @@ class PrefixLLM(nn.Module):
         temporal_clip_length = prefix_size_dict["temporal_prefix_size"]
         global_clip_length = prefix_size_dict["global_prefix_size"]
         
-        self.audio_encoder = PANClassifier(num_classes=2, device=device)
-        weights_path = '/data/valerii/heartbeats_classification/data/train_record/pann_balanced2/best_model'
-        params = torch.load(weights_path, map_location='cuda:' + str(device))
-        self.audio_encoder.load_state_dict(params)
+        self.audio_encoder = PANClassifier(num_classes=527, device=device, llm_mode=llm_mode)
+        # self.audio_encoder = get_PANNs_enc(self.device)
 
         self.gpt = GPT2Model.from_pretrained("gpt2")
 
@@ -51,7 +51,7 @@ class PrefixLLM(nn.Module):
                                         num_layers = global_num_layers, device = device)
         
         self.language_header = nn.Linear(768, 50257, bias=False) # 50257 : original vocabulary size of GPT2
-        header_gpt2_header_params = '/data/valerii/heartbeats_classification/models/weights/PreTrained_GPT2Header.pt'
+        header_gpt2_header_params = '/data/valerii/heartbeats_classification/models/resources/PreTrained_GPT2Header.pt'
         self.language_header.load_state_dict(torch.load(header_gpt2_header_params)) # use pre-trained header
         # nn.init.kaiming_uniform_(self.language_header.weight)
 
@@ -80,10 +80,21 @@ class PrefixLLM(nn.Module):
         else :
             print("header is training")
 
+    def activate_audio_encoder(self):
+        weights_path = '/data/valerii/heartbeats_classification/data/train_record/pann_balanced1/best_model'
+        params = torch.load(weights_path, map_location='cuda:' + str(self.device))
+        #load all params except very last layer (it defined as standard 527)
+        filtered_params = {key: value for key, value in params.items() if 'cnn.fc_audioset' not in key}
+        self.audio_encoder.load_state_dict(filtered_params, strict=False)
+    
     def forward(self, audio, tokens = None, mask = None, beam_search = True, with_softmax = True, check_prefix = False):
         
         temporal_feature, global_feature = self.audio_encoder(audio)
         
+        # print(temporal_feature.shape, temporal_feature)
+        # print(global_feature.shape, global_feature)
+
+
         temporal_prefix_vector = self.temporal_mappingnetwork(temporal_feature).view(-1, self.temporal_prefix_length, self.gpt_embedding_size)
         global_prefix_vector = self.global_mappingnetwork(global_feature).view(-1, self.global_prefix_length, self.gpt_embedding_size)
 
@@ -206,7 +217,7 @@ class PrefixLLM(nn.Module):
             order = scores.argsort(descending=True)
             output_texts = [output_texts[i] for i in order]
 
-            output_texts_list.append(output_texts)
+            output_texts_list.append(output_texts[0])
         
         return output_texts_list
     

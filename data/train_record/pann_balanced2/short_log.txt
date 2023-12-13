@@ -1,1 +1,1 @@
-Best model achieved on epoch 0, with f1 score = 0.9167281985282898
+Best model achieved on epoch 2, with f1 score = 0.9426122903823853

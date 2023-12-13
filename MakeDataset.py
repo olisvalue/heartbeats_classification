@@ -7,11 +7,16 @@ import os
 
 from collections import defaultdict
 
+#length is 35
+
 class MakeDataset(Dataset):
-    def __init__(self, base_dir, split, SR=16000, set_length = 35, raw_audio=False,
+    def __init__(self, base_dir, split, SR=16000, set_length = 25, raw_audio=False,
                 unlabeled_mode=False, filename_mode=False, zero_paddings=True,
-                llm_mode=False, prefix_length=-1) :  # split = 'train' or 'test'
+                llm_mode=False, prefix_length=-1,
+                diverse_captions = True) :  # split = 'train' or 'test'
         super(MakeDataset, self).__init__()
+
+        print("Using diverse captions" if diverse_captions == True else "1-caption per label")
 
         self.tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
         self.prefix_length = prefix_length
@@ -26,7 +31,7 @@ class MakeDataset(Dataset):
         self.data_dir = base_dir + '/' + split + '/'
         df = pd.read_csv(base_dir + '/dataset.csv')
         word_to_number = {"Normal": 0, "normal": 0,
-                          "Abnormal": 1, "artifact": 1, "murmur": 1, "extrahls": 1, "extrastole" : 1, "rubs":1}
+                          "Abnormal": 1, "artifact": 2, "murmur": 1, "extrahls": 1, "extrastole" : 1, "rubs":1}
         df['label'] = df['label'].map(word_to_number)
         label_dict = df.set_index('id').to_dict()['label']
         if self.llm_mode == True:
@@ -42,15 +47,20 @@ class MakeDataset(Dataset):
 
         self.audio_files = []
 
+        normal_caption = "Steady and normal heart rhytm."
+        abnormal_caption = "Unusual and irregular heart rate patterns."
+
         for file_name in tqdm(self.file_names, desc = f'get {split} dataset from {base_dir}...'):
             self.path_list.append(self.data_dir+file_name)
             if self.unlabeled_mode==False:
                 key = file_name[:-5] if filename_mode==False else file_name
-                # if df_dict[key] == 0:
-                #     continue
                 self.targets.append(label_dict[key])
             if self.llm_mode==True:
-                caption = captions_dict[key]
+                if diverse_captions == True:
+                    caption = captions_dict[key]
+                else:
+                    # 1-caption per label mode
+                    caption = normal_caption if self.targets[-1] == 0 else abnormal_caption
                 self.tokens.append(self.tokenizer(caption)['input_ids'])
         
             self.audio_files.append(self.process_audio_file(self.path_list[-1]))

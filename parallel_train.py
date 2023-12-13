@@ -26,9 +26,9 @@ def main(rank: int, world_size: int, total_epochs: int, model_name: str):
         # try:  
         model = PANClassifier(num_classes=2, device=rank)
 
-        weights_path = '/data/valerii/heartbeats_classification/data/train_record/pann_balanced1/best_model'
-        params = torch.load(weights_path, map_location='cuda:' + str(rank))
-        model.load_state_dict(params)
+        # weights_path = '/data/valerii/heartbeats_classification/data/train_record/pann_balanced1/best_model'
+        # params = torch.load(weights_path, map_location='cuda:' + str(rank))
+        # model.load_state_dict(params)
         
         TRAIN_BATCH_SIZE = 30
         TEST_BATCH_SIZE = 30
@@ -49,4 +49,4 @@ def main(rank: int, world_size: int, total_epochs: int, model_name: str):
         #     destroy_process_group()
 if __name__ == "__main__":
     world_size = 4
-    mp.spawn(main, args=(world_size, 260, "pann_balanced2"), nprocs=world_size)
+    mp.spawn(main, args=(world_size, 260, "pann_balanced3"), nprocs=world_size)

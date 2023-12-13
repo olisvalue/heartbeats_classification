@@ -11,7 +11,7 @@ class StatisticsMaker:
     def __init__(self, model_name, gpu_id, main_gpu_id):
         self.main_gpu_id = main_gpu_id
         self.given_gpu_id = gpu_id
-        # self.pbar = None
+        
         self.base_dir = "./data/train_record/" + model_name + '/'
         self.params_dir = self.base_dir + "params/"
         self.csv_path = self.base_dir + "eval_scores.csv"
@@ -126,10 +126,7 @@ class StatisticsMaker:
             df = pd.read_csv(self.csv_path)
             self.scores_dict = df.to_dict(orient='dict')
         for metric in self.metrics_list:
-            if self.LLM_mode==True:
-                score = scores[metric]["score"]
-            else:
-                score = scores[metric]
+            score = scores[metric]
             self.scores_dict[metric][self.epoch] = score
         #save scores to csv file
         df = pd.DataFrame.from_dict(self.scores_dict, orient='index').T

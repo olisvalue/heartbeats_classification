@@ -47,7 +47,7 @@ class MakeDataset(Dataset):
 
         self.file_names = set(os.listdir(self.data_dir))
         # self.audio_files = []
-        
+        z
         for i in tqdm(range(len(json_df)), desc = f'get {split} dataset from {base_dir}...'):
             file_id = json_df[i]["id"]
             captions = json_df[i]["caption"]
