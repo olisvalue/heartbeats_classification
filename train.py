@@ -10,9 +10,9 @@ import os, random, argparse
 from models.CNNClassifier import Model
 from models.PANClassifier import PANClassifier
 from Trainer import Trainer
-from MakeDataset import MakeDataset
+from datahandlers.MakeDataset import MakeDataset
 from Evaluater import Evaluater
-from CNNDataLoader import CNNDataLoader
+from datahandlers.CNNDataLoader import CNNDataLoader
 
 # reproducibility
 def initialization(seed = 0):   

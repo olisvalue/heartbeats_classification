@@ -1,7 +1,7 @@
 from torch.utils.data import DataLoader, ConcatDataset, SequentialSampler, WeightedRandomSampler
 from torch.utils.data.distributed import DistributedSampler
 
-from MakeDataset import MakeDataset
+from datahandlers.MakeDataset import MakeDataset
 
 from torch.utils.data import Sampler
 import torch.distributed as dist

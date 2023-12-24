@@ -7,7 +7,7 @@ import torch.distributed as dist
 from torch.distributed import init_process_group, destroy_process_group
 
 # custom
-from CNNDataLoader import CNNDataLoader
+from datahandlers.CNNDataLoader import CNNDataLoader
 from models.PANClassifier import * # network
 from Trainer import *
 

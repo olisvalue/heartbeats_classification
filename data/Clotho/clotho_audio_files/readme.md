@@ -1,1 +1,0 @@
-## Folder for saving the audio files in clotho dataset

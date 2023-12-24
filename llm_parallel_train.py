@@ -8,7 +8,7 @@ import torch.distributed as dist
 from torch.distributed import init_process_group, destroy_process_group
 
 # custom
-from CNNDataLoader import CNNDataLoader
+from datahandlers.CNNDataLoader import CNNDataLoader
 from models.PrefixLLM import * # network
 from llm_classification.LLMTrainer import *
 
@@ -30,13 +30,13 @@ def main(rank: int, world_size: int, total_epochs: int, model_name: str):
             model = PrefixLLM(encoder_freeze=False, 
                               prefix_size_dict = prefix_size_dict, device = rank,
                               llm_mode=True)
-            # weights_path = '/data/valerii/heartbeats_classification/models/resources/bbc_model2.pt'
+            # weights_path = './models/resources/bbc_model2.pt'
             # params = torch.load(weights_path, map_location='cuda:' + str(rank))
             # model.load_state_dict(params, strict=False)
 
             # model.activate_audio_encoder()
 
-            base_dir = '/data/valerii/heartbeats_classification/data/physionet'
+            base_dir = './data/physionet'
 
             TRAIN_BATCH_SIZE = 18
             TEST_BATCH_SIZE = 18

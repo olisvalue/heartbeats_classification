@@ -1,146 +1,156 @@
-import torch
-from torch.utils.data import Dataset
-
 import pandas as pd
-import torchaudio
-import os
+import torchaudio, torch
+from torch.utils.data import Dataset
+from transformers import GPT2Tokenizer
 from tqdm import tqdm
-import re
+import os
 
-def caption_preprocess(caption):
-    caption = caption.lower()    
-    caption = caption.replace(',', ' , ') 
-    caption = re.sub(' +', ' ', caption)
-    caption = caption.replace(' ,', ',')
-    caption = re.sub(r'[.]', '', caption)
-    caption += '.'
-    caption = caption.strip()
-    return caption
+from collections import defaultdict
 
-def convert_to_list(input_data):
-    if isinstance(input_data, str):
-        return [input_data]
-    elif isinstance(input_data, list):
-        return input_data
-    else:
-        raise ValueError("Caption must be a string or a list")
+#length is 35
 
 class MakeDataset(Dataset):
-    def __init__(self, tokenizer, base_dir, split, prefix_size, SR, tokens_size = 30, tokenizer_type = 'GPT2') :  # split = 'train' or 'test'
+    def __init__(self, base_dir, split, SR=16000, set_length = 25, raw_audio=False,
+                unlabeled_mode=False, filename_mode=False, zero_paddings=True,
+                llm_mode=False, prefix_length=-1,
+                diverse_captions = True) :  # split = 'train' or 'test'
         super(MakeDataset, self).__init__()
-        
-        self.SAMPLE_RATE = SR
-        # self.resample = torchaudio.transforms.Resample(audio_sr, self.SAMPLE_RATE)
 
+        print("Using diverse captions" if diverse_captions == True else "1-caption per label")
+
+        self.tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
+        self.prefix_length = prefix_length
+        self.llm_mode = llm_mode
+        self.zero_paddings = zero_paddings
+        self.raw_audio=raw_audio
+        self.unlabeled_mode=unlabeled_mode
         self.split = split
+        self.set_length = set_length
+        self.SR = SR
 
         self.data_dir = base_dir + '/' + split + '/'
-        json_df = pd.read_json(base_dir + '/' + 'dataset.json')
-        json_df = json_df["data"]
+        df = pd.read_csv(base_dir + '/dataset.csv')
+        word_to_number = {"Normal": 0, "normal": 0,
+                          "Abnormal": 1, "artifact": 2, "murmur": 1, "extrahls": 1, "extrastole" : 1, "rubs":1}
+        df['label'] = df['label'].map(word_to_number)
+        label_dict = df.set_index('id').to_dict()['label']
+        if self.llm_mode == True:
+            captions_dict = df.set_index('id').to_dict()['caption']
 
-        # file's name = youtube_id
-        #audio_file_list = os.listdir(self.data_dir)
-        
         self.path_list = []
-        self.token_list = []
-        self.caption_list_for_test = []
+        self.targets = []
+        self.captions = []
+        self.tokens = []
+        self.max_tok_len = 40
+        self.masks = []
+        self.file_names = list(set(os.listdir(self.data_dir)))
 
-        self.file_names = set(os.listdir(self.data_dir))
-        # self.audio_files = []
-        z
-        for i in tqdm(range(len(json_df)), desc = f'get {split} dataset from {base_dir}...'):
-            file_id = json_df[i]["id"]
-            captions = json_df[i]["caption"]
-            captions = convert_to_list(captions)
-            file_name = file_id + ".flac"
-            if file_name not in self.file_names:
-                continue
-            
+        self.audio_files = []
+
+        normal_caption = "Steady and normal heart rhytm."
+        abnormal_caption = "Unusual and irregular heart rate patterns."
+
+        for file_name in tqdm(self.file_names, desc = f'get {split} dataset from {base_dir}...'):
             self.path_list.append(self.data_dir+file_name)
-            
-            # self.add_audio_file(self.data_dir + self.path_list[-1])
+            if self.unlabeled_mode==False:
+                key = file_name[:-5] if filename_mode==False else file_name
+                self.targets.append(label_dict[key])
+            if self.llm_mode==True:
+                if diverse_captions == True:
+                    caption = captions_dict[key]
+                else:
+                    # 1-caption per label mode
+                    caption = normal_caption if self.targets[-1] == 0 else abnormal_caption
+                self.tokens.append(self.tokenizer(caption)['input_ids'])
+        
+            self.audio_files.append(self.process_audio_file(self.path_list[-1]))
+        
+        if self.llm_mode==True:
+            self.postprocess_all_tokens()
+        
 
-            for caption in captions : 
-                caption = caption_preprocess(caption)
-                if split != 'train' :
-                    self.caption_list_for_test.append(caption)
-                elif split == 'train' :
-                    if tokenizer_type == 'GPT2' :
-                        tokens = tokenizer(caption)['input_ids']
-                    else :
-                        tokens = tokenizer.encode(caption)
-                    self.token_list.append(torch.tensor(tokens))
-    
-
-        if split == 'train' :          
-            # self.all_len = torch.tensor([len(self.token_list[i]) for i in range(len(self.token_list))]).float()
-            # self.max_seq_len = min(int(self.all_len.mean() + self.all_len.std() * 4), int(self.all_len.max()))
-            # print("95%+ max tok len:", int(self.all_len.mean() + self.all_len.std() * 4))
-            # print("max tok len:", int(self.all_len.max()))
-            self.max_seq_len = tokens_size
-        self.prefix_length = prefix_size # audio_prefix_length + semantic_prefix_length
-            
     def __len__(self):
-        return len(self.path_list)
+        return len(self.audio_files)
     
-    def add_audio_file(self, path):
-        audio_file, sr = torchaudio.load(path)
-        audio_file = audio_file.squeeze(0)
-        if sr != self.SAMPLE_RATE:
-            print("resampling audio")
-            resample = torchaudio.transforms.Resample(sr, self.SAMPLE_RATE)
-            audio_file = resample(audio_file)
-         # slicing or padding based on set_length
-        # slicing
-        # if audio_file.shape[0] > (self.SAMPLE_RATE * self.set_length) :
-        #     audio_file = audio_file[:self.SAMPLE_RATE * self.set_length]
-        # # zero padding
-        # if audio_file.shape[0] < (self.SAMPLE_RATE * self.set_length) :
-        #     pad_len = (self.SAMPLE_RATE * self.set_length) - audio_file.shape[0]
-        #     pad_val = torch.zeros(pad_len)
-        #     audio_file = torch.cat((audio_file, pad_val), dim=0)
+    def postprocess_all_tokens(self):
+        for i in range(len(self.audio_files)):
+            self.postprocess_item_tokens(i)
 
-        #or compression
-        #audio_file = self.compress_audio(audio_file)
-
-        self.audio_files.append(audio_file)
-
-    def pad_tokens(self, item: int):
-        tokens = self.token_list[item].clone().detach()
-        padding = self.max_seq_len - tokens.shape[0]
+    def postprocess_item_tokens(self, item: int):
+        tokens = torch.tensor(self.tokens[item])
+        padding = self.max_tok_len - tokens.shape[0]
         if padding > 0:
             tokens = torch.cat((tokens, torch.zeros(padding, dtype=torch.int64) - 1))
-            self.token_list[item] = tokens
+            self.tokens[item] = tokens
         elif padding < 0:
-            tokens = tokens[:self.max_seq_len]
-            self.token_list[item] = tokens
+            tokens = tokens[:self.max_tok_len]
+            self.tokens[item] = tokens
         mask = tokens.ge(0)  # mask is zero where we out of sequence
         tokens[~mask] = 0
         mask = mask.float()
         mask = torch.cat((torch.ones(self.prefix_length), mask), dim=0)  # adding prefix mask
+        self.masks.append(mask)
         return tokens, mask
-    
-    def compress_audio(self, audio, set_length = 10) :
-        ratio = audio.size()[0]/(self.SAMPLE_RATE * set_length)
-        compress_idx_list = []
-        for idx in range(self.SAMPLE_RATE * set_length) :
-            compress_idx_list.append(int(ratio * idx))
 
-        return audio[compress_idx_list]
-    def get_all_len(self):
-        return self.all_len
-    
-    
-    def __getitem__(self, item: int) :
-        audio_file, sr = torchaudio.load(self.path_list[item])
-        audio_file = audio_file.squeeze(0)
-        if sr != self.SAMPLE_RATE:
+    def mel_transform(self, audio):
+        transform = torchaudio.transforms.MelSpectrogram(n_mels=128)
+        return transform(audio)
+
+    def resample_audio(self, audio, sr):
+        if sr != self.SR:
             print("resampling audio")
-            resample = torchaudio.transforms.Resample(sr, self.SAMPLE_RATE)
-            audio_file = resample(audio_file)
+            resample = torchaudio.transforms.Resample(sr, self.SR)
+            audio = resample(audio)
+        return audio
+    
+    def periodic_pad_audio(self, audio):
+        #slicing
+        sample_len = int(self.SR*self.set_length)
+        if audio.shape[0] > (sample_len) :
+            audio = audio[:sample_len]
+        # zero padding
+        if audio.shape[0] < (sample_len) :
+            audio = torch.cat((audio, audio), dim=0)
+            audio = self.periodic_pad_audio(audio)
+        return audio
 
-        if self.split == 'train' :
-            tokens, mask = self.pad_tokens(item)
-            return audio_file, tokens, mask, self.path_list[item]
-        else :
-            return audio_file, self.caption_list_for_test[item], self.path_list[item]
+    def pad_audio(self, audio):
+        #slicing
+        sample_len = int(self.SR*self.set_length)
+        if audio.shape[0] > (sample_len) :
+            audio = audio[:sample_len]
+        # zero padding
+        if audio.shape[0] < (sample_len) :
+            pad_len = (sample_len) - audio.shape[0]
+            pad_val = torch.zeros(pad_len)
+            audio = torch.cat((audio, pad_val), dim=0)
+        return audio
+
+    def process_audio_file(self, path):
+        audio, sr = torchaudio.load(path)
+        audio = audio.squeeze(0)
+        audio = self.resample_audio(audio, sr)
+        if self.zero_paddings == True:
+            audio = self.pad_audio(audio)
+        else:
+            audio = self.periodic_pad_audio(audio)
+        if not self.raw_audio:
+            mel_features = self.mel_transform(audio)
+            mel_features = mel_features.unsqueeze(0) #adding 1 channel for cnn
+            return mel_features
+        else:
+            return audio
+
+    def __getitem__(self, item: int) :
+
+        #pre-calculated mode
+        audio_file = self.audio_files[item]
+
+        if self.llm_mode == True:
+            return audio_file, self.targets[item], self.tokens[item], self.masks[item] 
+
+        elif self.unlabeled_mode == False:
+            return audio_file, self.targets[item]
+        else:
+            return audio_file, self.path_list[item]
+            # return audio_file, self.file_names[item][:-4]
