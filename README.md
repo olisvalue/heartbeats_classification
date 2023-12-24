@@ -7,7 +7,7 @@ The idea of this project is inspired by the following paper: https://arxiv.org/a
 
 Here is schematic diagram of the proposed pipeline:
 
-![Alt text](<pipeline.png>)
+![Alt text](<./assets/pipeline.png>)
 
 
 ## Achieved results.
